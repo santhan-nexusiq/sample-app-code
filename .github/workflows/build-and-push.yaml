@@ -40,7 +40,7 @@ jobs:
       # 6️⃣ Clone Helm repo and update image tag
       - name: Update image tag in Helm repo
         run: |
-          git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/santhan-nexusiq/sample-app-helm.git
+          git clone https://x-access-token:${{ secrets.HELM_REPO_PAT }}@github.com/santhan-nexusiq/sample-app-helm.git
           cd sample-app-helm
 
           sed -i "s|tag:.*|tag: \"${{ steps.vars.outputs.TAG }}\"|" charts/sample-app/values.yaml
@@ -50,3 +50,4 @@ jobs:
           git add charts/sample-app/values.yaml
           git commit -m "ci: update image tag to ${{ steps.vars.outputs.TAG }}"
           git push
+
